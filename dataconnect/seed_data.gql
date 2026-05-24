@@ -1,0 +1,116 @@
+mutation CreateSeedData @transaction @auth(level: USER, insecureReason: "Seed data can be created by any logged-in user for demonstration purposes.") {
+  user_insertMany(data: [
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      username: "userone",
+      email: "userone@example.com",
+      passwordHash: "hashedpassword1",
+      createdAt: "2023-01-01T12:00:00Z",
+      displayName: "User One",
+      profilePictureUrl: "https://example.com/pfp1.jpg"
+    },
+    {
+      id: "b1dcc0a0-a0c1-4df9-cc7e-7cc0ce491b22",
+      username: "usertwo",
+      email: "usertwo@example.com",
+      passwordHash: "hashedpassword2",
+      createdAt: "2023-01-02T13:00:00Z",
+      displayName: "User Two",
+      profilePictureUrl: "https://example.com/pfp2.jpg"
+    }
+  ])
+  subject_insertMany(data: [
+    {
+      id: "c2eff1b1-b1d2-4ee0-dd8f-8dd1df5a2c33",
+      name: "Mathematics",
+      createdAt: "2023-01-03T14:00:00Z",
+      description: "Fundamental concepts of mathematics."
+    },
+    {
+      id: "d3f0f2c2-c2e3-4ff1-ee90-9ee2ef6b3d44",
+      name: "Science",
+      createdAt: "2023-01-04T15:00:00Z",
+      description: "Exploring the natural world."
+    }
+  ])
+  topic_insertMany(data: [
+    {
+      id: "e401f3d3-d3f4-4a02-ff01-0ff3f07c4e55",
+      name: "Algebra",
+      subjectId: "c2eff1b1-b1d2-4ee0-dd8f-8dd1df5a2c33",
+      createdAt: "2023-01-05T16:00:00Z",
+      description: "Introduction to algebraic concepts."
+    },
+    {
+      id: "f512f4e4-e405-4b13-0012-1004f18d5f66",
+      name: "Physics",
+      subjectId: "d3f0f2c2-c2e3-4ff1-ee90-9ee2ef6b3d44",
+      createdAt: "2023-01-06T17:00:00Z",
+      description: "Principles of physics."
+    }
+  ])
+  question_insertMany(data: [
+    {
+      id: "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      text: "What is 2 + 2?",
+      optionA: "3",
+      optionB: "4",
+      optionC: "5",
+      optionD: "6",
+      correctOption: "4",
+      topicId: "e401f3d3-d3f4-4a02-ff01-0ff3f07c4e55",
+      createdAt: "2023-01-07T18:00:00Z",
+      explanation: "Basic arithmetic."
+    },
+    {
+      id: "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      text: "What is the capital of France?",
+      optionA: "Berlin",
+      optionB: "London",
+      optionC: "Paris",
+      optionD: "Rome",
+      correctOption: "Paris",
+      topicId: "f512f4e4-e405-4b13-0012-1004f18d5f66",
+      createdAt: "2023-01-08T19:00:00Z",
+      explanation: "General knowledge."
+    }
+  ])
+  studyMaterial_insertMany(data: [
+    {
+      id: "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      title: "Algebra Basics",
+      fileUrl: "https://example.com/algebra_basics.pdf",
+      topicId: "e401f3d3-d3f4-4a02-ff01-0ff3f07c4e55",
+      createdAt: "2023-01-09T20:00:00Z",
+      description: "Introduction to algebraic equations and expressions.",
+      fileType: "pdf"
+    },
+    {
+      id: "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f90",
+      title: "Physics Formulas",
+      fileUrl: "https://example.com/physics_formulas.docx",
+      topicId: "f512f4e4-e405-4b13-0012-1004f18d5f66",
+      createdAt: "2023-01-10T21:00:00Z",
+      description: "Key formulas for classical mechanics.",
+      fileType: "docx"
+    }
+  ])
+  userAttempt_insertMany(data: [
+    {
+      id: "5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f90a1",
+      userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      questionId: "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      selectedOption: "4",
+      isCorrect: true,
+      attemptedAt: "2023-01-11T22:00:00Z"
+    },
+    {
+      id: "6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f90a1b2",
+      userId: "b1dcc0a0-a0c1-4df9-cc7e-7cc0ce491b22",
+      questionId: "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      selectedOption: "Berlin",
+      isCorrect: false,
+      attemptedAt: "2023-01-12T23:00:00Z"
+    }
+  ])
+}

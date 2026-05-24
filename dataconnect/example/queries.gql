@@ -1,0 +1,48 @@
+# Operation 1: Create a new user (admin-level access)
+mutation CreateUser($username: String!, $email: String!, $passwordHash: String!, $displayName: String, $profilePictureUrl: String) @auth(expr: "auth.token.admin == true") {
+  user_insert(data: {
+    username: $username,
+    email: $email,
+    passwordHash: $passwordHash,
+    createdAt_expr: "request.time",
+    displayName: $displayName,
+    profilePictureUrl: $profilePictureUrl
+  })
+}
+
+# Operation 2: Get a user's own profile (logged-in user access)
+query GetMyProfile @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  user(key: {id_expr: "auth.uid"}) {
+    id
+    username
+    email
+    displayName
+    profilePictureUrl
+    createdAt
+  }
+}
+
+# Operation 3: List all topics for a specific subject (public access)
+query ListTopicsBySubject($subjectId: UUID!) @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  topics(where: {subjectId: {eq: $subjectId}}, orderBy: [{name: ASC}]) {
+    id
+    name
+    description
+    createdAt
+    subject {
+      id
+      name
+    }
+  }
+}
+
+# Operation 4: Record a user's attempt on a question (logged-in user access)
+mutation RecordUserAttempt($questionId: UUID!, $selectedOption: String!, $isCorrect: Boolean!) @auth(level: USER) {
+  userAttempt_insert(data: {
+    userId_expr: "auth.uid",
+    questionId: $questionId,
+    selectedOption: $selectedOption,
+    isCorrect: $isCorrect,
+    attemptedAt_expr: "request.time"
+  })
+}

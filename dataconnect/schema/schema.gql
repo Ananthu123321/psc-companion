@@ -1,0 +1,50 @@
+type User @table {
+  username: String!
+  email: String!
+  passwordHash: String!
+  createdAt: Timestamp!
+  displayName: String
+  profilePictureUrl: String
+}
+
+type Subject @table {
+  name: String!
+  createdAt: Timestamp!
+  description: String
+}
+
+type Topic @table {
+  name: String!
+  subject: Subject!
+  createdAt: Timestamp!
+  description: String
+}
+
+type Question @table {
+  text: String!
+  optionA: String!
+  optionB: String!
+  optionC: String!
+  optionD: String!
+  correctOption: String!
+  topic: Topic!
+  createdAt: Timestamp!
+  explanation: String
+}
+
+type UserAttempt @table {
+  user: User!
+  question: Question!
+  selectedOption: String!
+  isCorrect: Boolean!
+  attemptedAt: Timestamp!
+}
+
+type StudyMaterial @table {
+  title: String!
+  fileUrl: String!
+  topic: Topic!
+  createdAt: Timestamp!
+  description: String
+  fileType: String
+}
