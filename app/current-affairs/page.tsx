@@ -16,7 +16,7 @@ CurrentAffairsPage() {
 
         </h1>
 
-        <CurrentAffairs />
+        <CurrentAffairs showAll />
 
       </div>
 

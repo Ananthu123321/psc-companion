@@ -215,7 +215,7 @@ const filteredAffairs =
           
           <div className="grid md:grid-cols-2 gap-6">
 
-          {filteredAffairs.slice(0, 4).map((item) => (
+          {(showAll? filteredAffairs: filteredAffairs.slice(0, 4)).map((item) => (
 
             <div
               key={item.id}
