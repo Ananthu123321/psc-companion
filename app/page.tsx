@@ -138,7 +138,7 @@ export default function Home() {
 
         <StatsCards />
 
-        <CurrentAffairs showAll />
+        <CurrentAffairs />
 
         <StreakCard />
 

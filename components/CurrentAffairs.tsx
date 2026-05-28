@@ -136,11 +136,28 @@ const filteredAffairs =
 
     <section className="mt-14">
 
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
 
-        <h2 className="text-3xl font-bold text-blue-700">
-          Daily Current Affairs
-        </h2>
+        <div>
+
+          <h2 className="text-3xl font-bold text-blue-700">
+
+            Daily Current Affairs
+
+          </h2>
+
+          <p className="text-gray-600 mt-2">
+
+            Total Current Affairs:
+            <span className="font-bold text-blue-700 ml-2">
+
+              {filteredAffairs.length}
+
+            </span>
+
+          </p>
+
+        </div>
 
         <button
           onClick={fetchCurrentAffairs}
